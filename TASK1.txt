@@ -1,0 +1,48 @@
+mysql> use mrunal
+Database changed
+mysql> select * from student
+    -> ;
++---------+------+--------+
+| STUD_ID | NAME | COURSE |
++---------+------+--------+
+|       1 | ALEX | DAC    |
+|       2 | ROMI | DBD    |
+|       3 | TOMI | DAC    |
+|       4 | CRUZ | DAC    |
+|       5 | MAX  | DAC    |
++---------+------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update student set course = '
+    -> WHERE STUD_ID = 3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warning
+
+mysql> select * from student;
++---------+------+--------+
+| STUD_ID | NAME | COURSE |
++---------+------+--------+
+|       1 | ALEX | DAC    |
+|       2 | ROMI | DBD    |
+|       3 | TOMI | DBD    |
+|       4 | CRUZ | DAC    |
+|       5 | MAX  | DAC    |
++---------+------+--------+
+5 rows in set (0.00 sec)
+
+mysql> DELETE FROM STUDENT
+    -> WHERE STUD_ID = 4;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from student;
++---------+------+--------+
+| STUD_ID | NAME | COURSE |
++---------+------+--------+
+|       1 | ALEX | DAC    |
+|       2 | ROMI | DBD    |
+|       3 | TOMI | DBD    |
+|       5 | MAX  | DAC    |
++---------+------+--------+
+4 rows in set (0.00 sec)
+
+mysql>
