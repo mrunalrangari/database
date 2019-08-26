@@ -1,0 +1,10 @@
+mysql> DROP TABLE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check t
+mysql> DROP TABLE STUDENT;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from student;
+ERROR 1146 (42S02): Table 'mrunal.student' doesn't exist
+mysql>
+
+
