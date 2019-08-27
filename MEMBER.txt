@@ -1,0 +1,86 @@
+ysql> use college;
+atabase changed
+ysql> create table member(
+   -> MEMBER_ID int AUTO_INCREMENT
+   -> PRIMARY KEY,
+   -> FNAME varchar(20) NOT NULL,
+   -> MNAME varchar(10),
+   -> LNAME varchar(20) NOT NULL,
+   -> MEM_DOJ date,
+   -> EMAIL varchar(30),
+   -> PHONE CHAR(10),
+   -> MEM_TYPE ENUM ('REGULAR','SILVER','GOLD','PREMIUM'));
+uery OK, 0 rows affected (0.08 sec)
+
+ysql> ALTER TABLE MEMBER
+   -> ADD CONSTRAINT MEMBER_EMAIL_UQ
+   -> UNIQUE (EMAIL);
+uery OK, 0 rows affected (0.13 sec)
+ecords: 0  Duplicates: 0  Warnings: 0
+
+ysql> DESCRIBE MEMBER;
+-----------+-------------------------------------------+------+-----+---------+
+---------------+
+ Field     | Type                                      | Null | Key | Default |
+Extra          |
+-----------+-------------------------------------------+------+-----+---------+
+---------------+
+ MEMBER_ID | int(11)                                   | NO   | PRI | NULL    |
+auto_increment |
+ FNAME     | varchar(20)                               | NO   |     | NULL    |
+               |
+ MNAME     | varchar(10)                               | YES  |     | NULL    |
+               |
+ LNAME     | varchar(20)                               | NO   |     | NULL    |
+               |
+ MEM_DOJ   | date                                      | YES  |     | NULL    |
+               |
+ EMAIL     | varchar(30)                               | YES  | UNI | NULL    |
+               |
+ PHONE     | char(10)                                  | YES  |     | NULL    |
+               |
+ MEM_TYPE  | enum('REGULAR','SILVER','GOLD','PREMIUM') | YES  |     | NULL    |
+               |
+-----------+-------------------------------------------+------+-----+---------+
+---------------+
+ rows in set (0.02 sec)
+
+ysql> INSERT INTO MEMBER (FNAME,MNAME,LNMAE,MEM_DOJ,
+   -> EMAIL,PHONE,MEM_TYPE) VALUES ('JANET',NULL,'KING',NOW(),'JKING@GMAIL.COM','9785746352','REGULAR');
+RROR 1054 (42S22): Unknown column 'LNMAE' in 'field list'
+ysql> INSERT INTO MEMBER (FNAME,MNAME,LNAME,MEM_DOJ,
+   -> EMAIL,PHONE,MEM_TYPE) VALUES ('JANET',NULL,'KING',NOW(),'JKING@GMAIL.COM','9785746352','REGULAR');
+uery OK, 1 row affected, 1 warning (0.05 sec)
+
+ysql> INSERT INTO MEMBER (FNAME,MNAME,LNMAE,MEM_DOJ,
+   -> EMAIL,PHONE,MEM_TYPE) VALUES ('STIVEN',NULL,'KING',NOW(),'SKING@GMAIL.COM','9886756438','SILVER');
+RROR 1054 (42S22): Unknown column 'LNMAE' in 'field list'
+ysql> INSERT INTO MEMBER (FNAME,MNAME,LNAME,MEM_DOJ,
+   -> EMAIL,PHONE,MEM_TYPE) VALUES ('STIVEN',NULL,'KING',NOW(),'SKING@GMAIL.COM','9886756438','SILVER');
+uery OK, 1 row affected, 1 warning (0.03 sec)
+
+ysql> INSERT INTO MEMBER (FNAME,MNAME,LNAME,MEM_DOJ,
+   -> EMAIL,PHONE,MEM_TYPE) VALUES ('ANDY','S','KING',NOW(),NULL,'9485763426','GOLD');
+uery OK, 1 row affected, 1 warning (0.03 sec)
+
+ysql> INSERT INTO MEMBER (FNAME,MNAME,LNAME,MEM_DOJ,
+   -> EMAIL,PHONE,MEM_TYPE) VALUES ('ANDY','S','HILLMAN','2019-08-27',NULL,'9586756453','PREMIUM');
+uery OK, 1 row affected (0.02 sec)
+
+ysql> SELECT * FROM MEMBER;
+-----------+--------+-------+---------+------------+-----------------+------------+----------+
+ MEMBER_ID | FNAME  | MNAME | LNAME   | MEM_DOJ    | EMAIL           | PHONE      | MEM_TYPE |
+-----------+--------+-------+---------+------------+-----------------+------------+----------+
+         1 | JANET  | NULL  | KING    | 2019-08-27 | JKING@GMAIL.COM | 9785746352 | REGULAR  |
+         2 | STIVEN | NULL  | KING    | 2019-08-27 | SKING@GMAIL.COM | 9886756438 | SILVER   |
+         3 | ANDY   | S     | KING    | 2019-08-27 | NULL            | 9485763426 | GOLD     |
+         4 | ANDY   | S     | HILLMAN | 2019-08-27 | NULL            | 9586756453 | PREMIUM  |
+-----------+--------+-------+---------+------------+-----------------+------------+----------+
+ rows in set (0.00 sec)
+
+ysql>
+
+
+
+
+
