@@ -1,0 +1,291 @@
+ BOOKNAME | varchar(50)  | NO   |     | NULL    |
+ PRICE    | decimal(6,2) | YES  |     | NULL    |
+ AUTHOR   | char(30)     | NO   |     | NULL    |
+----------+--------------+------+-----+---------+---------------
+ rows in set (0.01 sec)
+
+ysql> ALTER TABLE BOOK
+   -> DROP COLUMN AUTHOR;
+uery OK, 0 rows affected (0.11 sec)
+ecords: 0  Duplicates: 0  Warnings: 0
+
+ysql> DESCRIBE BOOK;
+----------+--------------+------+-----+---------+---------------
+ Field    | Type         | Null | Key | Default | Extra
+----------+--------------+------+-----+---------+---------------
+ BOOKID   | int(11)      | NO   | PRI | NULL    | auto_increment
+ BOOKNAME | varchar(50)  | NO   |     | NULL    |
+ PRICE    | decimal(6,2) | YES  |     | NULL    |
+----------+--------------+------+-----+---------+---------------
+ rows in set (0.01 sec)
+
+ysql> INSERT INTO (BOOKNAME,PRICE) VALUES('MYSQL FOR DUMMIES',35
+   -> ('MYSQL FOR DEVELOPER',560);
+RROR 1064 (42000): You have an error in your SQL syntax; check t
+orresponds to your MySQL server version for the right syntax to
+AME,PRICE) VALUES('MYSQL FOR DUMMIES',350),
+'MYSQL FOR DEVELOPER',560)' at line 1
+ysql> INSERT INTO BOOK (BOOKNAME,PRICE) VALUES('MYSQL FOR DUMMIE
+   -> ('MYSQL FOR DEVELOPER',560);
+uery OK, 2 rows affected (0.03 sec)
+ecords: 2  Duplicates: 0  Warnings: 0
+
+ysql> DESCRIBE BOOK;
+----------+--------------+------+-----+---------+---------------
+ Field    | Type         | Null | Key | Default | Extra
+----------+--------------+------+-----+---------+---------------
+ BOOKID   | int(11)      | NO   | PRI | NULL    | auto_increment
+ BOOKNAME | varchar(50)  | NO   |     | NULL    |
+ PRICE    | decimal(6,2) | YES  |     | NULL    |
+----------+--------------+------+-----+---------+---------------
+ rows in set (0.02 sec)
+
+ysql> SELECT * FROM BOOK;
+--------+---------------------+--------+
+ BOOKID | BOOKNAME            | PRICE  |
+--------+---------------------+--------+
+      1 | MYSQL FOR DUMMIES   | 350.00 |
+      2 | MYSQL FOR DEVELOPER | 560.00 |
+--------+---------------------+--------+
+ rows in set (0.00 sec)
+
+ysql> INSERT INTO BOOK (BOOKNAME,PRICE) VALUES('MYSQL FOR DUMMIE
+   -> ('MYSQL FOR DEVELOPER',-560);
+uery OK, 2 rows affected (0.03 sec)
+ecords: 2  Duplicates: 0  Warnings: 0
+
+ysql> SELECT * FROM BOOK;
+--------+---------------------+---------+
+ BOOKID | BOOKNAME            | PRICE   |
+--------+---------------------+---------+
+      1 | MYSQL FOR DUMMIES   |  350.00 |
+      2 | MYSQL FOR DEVELOPER |  560.00 |
+      3 | MYSQL FOR DUMMIES   |  350.00 |
+      4 | MYSQL FOR DEVELOPER | -560.00 |
+--------+---------------------+---------+
+ rows in set (0.00 sec)
+
+ysql> DELETE FROM BOOK WHERE BOOKID = 4;
+uery OK, 1 row affected (0.03 sec)
+
+ysql> SELECT * FROM BOOK;
+--------+---------------------+--------+
+ BOOKID | BOOKNAME            | PRICE  |
+--------+---------------------+--------+
+      1 | MYSQL FOR DUMMIES   | 350.00 |
+      2 | MYSQL FOR DEVELOPER | 560.00 |
+      3 | MYSQL FOR DUMMIES   | 350.00 |
+--------+---------------------+--------+
+ rows in set (0.00 sec)
+
+ysql> TRUNCATE BOOK;
+uery OK, 0 rows affected (0.03 sec)
+
+ysql> SELECT * FROM BOOK;
+mpty set (0.00 sec)
+
+ysql> DROP TABLE BOOK;
+uery OK, 0 rows affected (0.03 sec)
+
+ysql> ALTER TABLE BOOK
+   -> DROP CONSTRAINT BOOK_PRICE_CHK;
+RROR 1064 (42000): You have an error in your SQL syntax; check t
+orresponds to your MySQL server version for the right syntax to
+AINT BOOK_PRICE_CHK' at line 2
+ysql> ALTER TABLE BOOK
+   -> ADD CONSTRAINT BOOK_PRICE_CHK
+   -> CHECK(PRICE >=200
+   -> AND PRICE<=3000
+   -> );
+RROR 1146 (42S02): Table 'morningstar.book' doesn't exist
+ysql> create table book( BOOKID INT AUTO_INCREMENT PRIMARY KEY,B
+50) NOT NULL,
+   -> PRICE DECIMAL(6,2));
+uery OK, 0 rows affected (0.05 sec)
+
+ysql> ALTER TABLE BOOK
+   -> ADD COLUMN AUTHOR VARCHAR(30)
+   -> NOT NULL;
+uery OK, 0 rows affected (0.11 sec)
+ecords: 0  Duplicates: 0  Warnings: 0
+
+ysql> DESCRIBE BOOK;
+----------+--------------+------+-----+---------+---------------
+ Field    | Type         | Null | Key | Default | Extra
+----------+--------------+------+-----+---------+---------------
+ BOOKID   | int(11)      | NO   | PRI | NULL    | auto_increment
+ BOOKNAME | varchar(50)  | NO   |     | NULL    |
+ PRICE    | decimal(6,2) | YES  |     | NULL    |
+ AUTHOR   | varchar(30)  | NO   |     | NULL    |
+----------+--------------+------+-----+---------+---------------
+ rows in set (0.01 sec)
+
+ysql> ALTER TABLE BOOK
+   -> MODIFY COLUMN AUTHOR VARCHAR(30)
+   -> NOT NULL;
+uery OK, 0 rows affected (0.08 sec)
+ecords: 0  Duplicates: 0  Warnings: 0
+
+ysql> ALTER TABLE BOOK
+   -> MODIFY COLUMN AUTHOR VARCHAR(30)
+   -> NOT NULL;
+uery OK, 0 rows affected (0.08 sec)
+ecords: 0  Duplicates: 0  Warnings: 0
+
+ysql> ALTER TABLE BOOK
+   -> DROP COLUMN AUTHOR;
+uery OK, 0 rows affected (0.11 sec)
+ecords: 0  Duplicates: 0  Warnings: 0
+
+ysql> DESCRIBE BOOK;
+----------+--------------+------+-----+---------+---------------
+ Field    | Type         | Null | Key | Default | Extra
+----------+--------------+------+-----+---------+---------------
+ BOOKID   | int(11)      | NO   | PRI | NULL    | auto_increment
+ BOOKNAME | varchar(50)  | NO   |     | NULL    |
+ PRICE    | decimal(6,2) | YES  |     | NULL    |
+----------+--------------+------+-----+---------+---------------
+ rows in set (0.02 sec)
+
+ysql> INSERT INTO (BOOKNAME,PRICE) VALUES('MYSQL FOR DUMMIES',35
+   -> ('MYSQL FOR DEVELOPER',560);
+RROR 1064 (42000): You have an error in your SQL syntax; check t
+orresponds to your MySQL server version for the right syntax to
+AME,PRICE) VALUES('MYSQL FOR DUMMIES',350),
+'MYSQL FOR DEVELOPER',560)' at line 1
+ysql> INSERT INTO BOOK (BOOKNAME,PRICE) VALUES('MYSQL FOR DUMMIE
+   -> ('MYSQL FOR DEVELOPER',-560);
+uery OK, 2 rows affected (0.03 sec)
+ecords: 2  Duplicates: 0  Warnings: 0
+
+ysql> SELECT * FROM BOOK;
+--------+---------------------+---------+
+ BOOKID | BOOKNAME            | PRICE   |
+--------+---------------------+---------+
+      1 | MYSQL FOR DUMMIES   |  350.00 |
+      2 | MYSQL FOR DEVELOPER | -560.00 |
+--------+---------------------+---------+
+ rows in set (0.00 sec)
+
+ysql> INSERT INTO BOOK (BOOKNAME,PRICE) VALUES('HTML5 STEP BY ST
+   -> ('JAVA UNLEASHED',560);
+uery OK, 2 rows affected (0.02 sec)
+ecords: 2  Duplicates: 0  Warnings: 0
+
+ysql> SELECT * FROM BOOK;
+--------+---------------------+---------+
+ BOOKID | BOOKNAME            | PRICE   |
+--------+---------------------+---------+
+      1 | MYSQL FOR DUMMIES   |  350.00 |
+      2 | MYSQL FOR DEVELOPER | -560.00 |
+      3 | HTML5 STEP BY STEPS |    NULL |
+      4 | JAVA UNLEASHED      |  560.00 |
+--------+---------------------+---------+
+ rows in set (0.00 sec)
+
+ysql> ALTER TABLE BOOK
+   -> DROP CONSTRAINT BOOK_PRICE_CHK;
+RROR 1064 (42000): You have an error in your SQL syntax; check t
+orresponds to your MySQL server version for the right syntax to
+AINT BOOK_PRICE_CHK' at line 2
+ysql> ALTER TABLE BOOK
+   -> ADD CONSTRAINT BOOK_PRICE_CHK
+   -> CHECK (PRICE >=200
+   -> AND PRICE<=3000);
+uery OK, 4 rows affected (0.09 sec)
+ecords: 4  Duplicates: 0  Warnings: 0
+
+ysql> SELECT * FROM BOOK;
+--------+---------------------+---------+
+ BOOKID | BOOKNAME            | PRICE   |
+--------+---------------------+---------+
+      1 | MYSQL FOR DUMMIES   |  350.00 |
+      2 | MYSQL FOR DEVELOPER | -560.00 |
+      3 | HTML5 STEP BY STEPS |    NULL |
+      4 | JAVA UNLEASHED      |  560.00 |
+--------+---------------------+---------+
+ rows in set (0.01 sec)
+
+ysql> INSERT INTO BOOK ( BOOKNAME , PRICE) VALUES
+   -> ('.NET UNLEASHED',100);
+uery OK, 1 row affected (0.03 sec)
+
+ysql> SELECT * FROM BOOK;
+--------+---------------------+---------+
+ BOOKID | BOOKNAME            | PRICE   |
+--------+---------------------+---------+
+      1 | MYSQL FOR DUMMIES   |  350.00 |
+      2 | MYSQL FOR DEVELOPER | -560.00 |
+      3 | HTML5 STEP BY STEPS |    NULL |
+      4 | JAVA UNLEASHED      |  560.00 |
+      5 | .NET UNLEASHED      |  100.00 |
+--------+---------------------+---------+
+ rows in set (0.02 sec)
+
+ysql> ALTER TABLE BOOK
+   -> ADD CONSTRAINT BOOK_PRICE_CHK
+   -> CHECK (PRICE >=200
+   -> AND PRICE<=3000);
+uery OK, 5 rows affected (0.11 sec)
+ecords: 5  Duplicates: 0  Warnings: 0
+
+ysql> SELECT * FROM BOOK;
+--------+---------------------+---------+
+ BOOKID | BOOKNAME            | PRICE   |
+--------+---------------------+---------+
+      1 | MYSQL FOR DUMMIES   |  350.00 |
+      2 | MYSQL FOR DEVELOPER | -560.00 |
+      3 | HTML5 STEP BY STEPS |    NULL |
+      4 | JAVA UNLEASHED      |  560.00 |
+      5 | .NET UNLEASHED      |  100.00 |
+--------+---------------------+---------+
+ rows in set (0.00 sec)
+
+ysql> ALTER TABLE BOOK
+   -> ADD CONSTRAINT BOOK_PRICE_CHK
+   -> CHECK (PRICE BETWEEN 200 AND 300);
+uery OK, 5 rows affected (0.09 sec)
+ecords: 5  Duplicates: 0  Warnings: 0
+
+ysql> SELECT * FROM BOOK;
+--------+---------------------+---------+
+ BOOKID | BOOKNAME            | PRICE   |
+--------+---------------------+---------+
+      1 | MYSQL FOR DUMMIES   |  350.00 |
+      2 | MYSQL FOR DEVELOPER | -560.00 |
+      3 | HTML5 STEP BY STEPS |    NULL |
+      4 | JAVA UNLEASHED      |  560.00 |
+      5 | .NET UNLEASHED      |  100.00 |
+--------+---------------------+---------+
+ rows in set (0.00 sec)
+
+ysql> ALTER TABLE BOOK
+   -> ADD CONSTRAINT BOOK_PRICE_CHK
+   -> CHECK (PRICE IN( 200 AND 300));
+uery OK, 5 rows affected (0.09 sec)
+ecords: 5  Duplicates: 0  Warnings: 0
+
+ysql> SELECT * FROM BOOK;
+--------+---------------------+---------+
+ BOOKID | BOOKNAME            | PRICE   |
+--------+---------------------+---------+
+      1 | MYSQL FOR DUMMIES   |  350.00 |
+      2 | MYSQL FOR DEVELOPER | -560.00 |
+      3 | HTML5 STEP BY STEPS |    NULL |
+      4 | JAVA UNLEASHED      |  560.00 |
+      5 | .NET UNLEASHED      |  100.00 |
+--------+---------------------+---------+
+ rows in set (0.00 sec)
+
+ysql> SELECT PRICE FROM BOOK
+   -> WHERE PRICE BETWEEN 200 AND 300;
+mpty set (0.01 sec)
+
+ysql> SELECT PRICE FROM BOOK
+   -> WHERE PRICE BETWEEN 50 AND 300;
+--------+
+ PRICE  |
+--------+
+ 100.00 |
+--------+
+ row in set (0.00 sec)
